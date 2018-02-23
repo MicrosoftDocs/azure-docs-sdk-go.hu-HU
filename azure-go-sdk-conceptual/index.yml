@@ -1,0 +1,84 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure a Go fejlesztők számára"
+metadata:
+  title: "Azure a Go fejlesztők számára – Oktatóanyagok, API-referencia"
+  description: "Az alábbi fejlesztői erőforrások használatával megkezdheti a Góhoz készült Azure SDK-val való fejlesztést."
+  keywords: Azure, Go, golang, SDK, API
+  author: sptramer
+  ms.author: sttramer
+  manager: routlaw
+  ms.date: 01/30/2018
+  ms.topic: article
+  featureFlags:
+  - clicktale
+  ms.prod: azure
+  ms.technology: azure
+  ms.devlang: golang
+  ms.service: multiple
+  ms.openlocfilehash: cd733628931b0b902438734340b1145ad9c179d6
+  ms.sourcegitcommit: aaa8c37880332625f858a38f5918e6cf581bf48d
+  ms.translationtype: HT
+  ms.contentlocale: hu-HU
+  ms.lasthandoff: 02/15/2018
+sections:
+- items:
+  - type: markdown
+    text: "A hivatalos oktatóanyagokkal és eszközök használatával megkezdheti a Góhoz készült Azure SDK-val való alkalmazásfejlesztést.\n"
+- items:
+  - type: list
+    style: cards
+    className: cardsM
+    columns: 2
+    items:
+    - title: "Első lépések"
+      html: "<p>A Góhoz készült Azure SDK telepítése</p>"
+      href: https://docs.microsoft.com/go/azure/azure-sdk-go-install
+      image:
+        src: https://docs.microsoft.com/media/common/i_get-started.svg
+    - title: "Kódminták"
+      html: "<p>Azure-kódminták a Go használatával</p>"
+      image:
+        src: https://docs.microsoft.com//media/common/i_code-samples.svg
+      href: https://github.com/azure-samples/azure-sdk-for-go-samples
+    - title: "SDK és eszközök"
+      html: "<p>Fejlesztői eszközök</p>"
+      href: https://docs.microsoft.com/go/azure/azure-sdk-go-tools
+      image:
+        src: https://docs.microsoft.com/media/common/i_download-install.svg
+    - title: "API-hivatkozás"
+      html: "<p>GoDoc a Góhoz készült Azure SDK-hoz</p>"
+      href: https://godoc.org/github.com/Azure/azure-sdk-for-go
+      image:
+        src: https://docs.microsoft.com/media/common/i_api-reference.svg
+- title: "Go SDK rövid útmutatók"
+  items:
+  - type: paragraph
+    text: "Megtudhatja, hogyan használhatja a Góhoz készült Azure SDK-t."
+  - type: list
+    style: cards
+    className: cardsM
+    columns: 2
+    items:
+    - title: "Virtuális gép üzembe helyezése Azure-erőforrássablonból a Go használatával"
+      href: https://docs.microsoft.com/go/azure/azure-sdk-go-qs-vm
+      image:
+        src: https://docs.microsoft.com/azure/virtual-machines/media/index/virtualmachine.svg
+    - title: "Objektumok továbbítása az Azure Blob Storage tárolóba a Góhoz készült Azure Storage SDK-val"
+      href: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-go?toc=%2fgo%2fazure%2ftoc.json
+      image:
+        src: https://docs.microsoft.com/azure/media/index/logo_azure-blob-storage.svg
+    - title: "Csatlakozás az Azure Database for PostgreSQL-hez a Go használatával"
+      href: https://docs.microsoft.com/azure/postgresql/connect-go?toc=%2fgo%2fazure%2ftoc.json
+      image:
+        src: https://docs.microsoft.com//azure/media/index/PostgreSQL.svg
+  - title: "Példák"
+    items:
+    - type: list
+      style: unordered
+      items:
+      - html: "<a href=\"https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/iam\">Hitelesítés az Azure-szolgáltatásokkal</a>"
+      - html: "<a href=\"https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute\">Új virtuális gépek létrehozása</a>"
+      - html: "<a href=\"https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerinstance\">Tároló üzembe helyezése az Azure Container Instances szolgáltatásban</a>"
+      - html: "<a href=\"https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerservice\">Fürt létrehozása Azure Kubernetes-szolgáltatásban</a>"
+      - html: "<a href=\"https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/storage\">Az Azure Storage-szolgáltatások használata</a>"
