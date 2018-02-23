@@ -1,0 +1,25 @@
+items:
+  - name: Góhoz készült Azure SDK
+    href: index.yml
+  - name: Áttekintés
+    items:
+      - name: Telepítés
+        href: azure-sdk-go-install.md
+      - name: Eszközök
+        href: azure-sdk-go-tools.md
+  - name: Go SDK rövid útmutatók
+    items:
+      - name: Virtuális gépek és erőforrássablonok
+        href: azure-sdk-go-qs-vm.md
+      - name: Azure Blob Storage
+        href: /azure/storage/blobs/storage-quickstart-blobs-go?toc=%2fgo%2fazure%2ftoc.json
+      - name: Azure Database for PostgreSQL
+        href: /azure/postgresql/connect-go?toc=%2fgo%2fazure%2ftoc.json
+      - name: Azure Database for MySQL
+        href: /azure/mysql/connect-go?toc=%2fgo%2fazure%2ftoc.json
+      - name: Azure SQL Database
+        href: /azure/sql-database/sql-database-connect-query-go?toc=%2fgo%2fazure%2ftoc.json
+  - name: Példák
+    href: 'http://github.com/azure-samples/azure-sdk-for-go-samples'
+  - name: API-referencia
+    href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go'
