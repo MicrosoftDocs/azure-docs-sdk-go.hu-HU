@@ -8,11 +8,11 @@ ms.date: 01/30/2018
 ms.topic: article
 ms.devlang: go
 manager: routlaw
-ms.openlocfilehash: f822a9304a4744e0b0e93286303aa8bb80fec852
-ms.sourcegitcommit: aaa8c37880332625f858a38f5918e6cf581bf48d
+ms.openlocfilehash: 7fc0a3ff71b0b06f616ae43cff311352fe873345
+ms.sourcegitcommit: 890f5f01a70e7e376e6bb98a2030afbfc016f538
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 03/01/2018
 ---
 # <a name="installing-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
@@ -30,7 +30,7 @@ go get -u -d github.com/Azure/azure-storage-blob-go/...
 
 ## <a name="vendoring-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK bemásolása
 
-A Góhoz készült Azure SDK a [dep](https://github.com/golang/dep) eszközön keresztül másolható be. A stabilitás miatt ajánlott a bemásolás elvégzése. A `dep` támogatás használatához adja a `gitub.com/Azure/azure-sdk-for-go` elemet a `Gopkg.toml` egyik `[[constraint]]` szakaszához. A `14.0.0` verzió bemásolásához például adja hozzá a következő bejegyzést:
+A Góhoz készült Azure SDK a [dep](https://github.com/golang/dep) eszközön keresztül másolható be. A stabilitás miatt ajánlott a bemásolás elvégzése. A `dep` támogatás használatához adja a `github.com/Azure/azure-sdk-for-go` elemet a `Gopkg.toml` egyik `[[constraint]]` szakaszához. A `14.0.0` verzió bemásolásához például adja hozzá a következő bejegyzést:
 
 ```
 [[constraint]]
