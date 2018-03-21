@@ -8,11 +8,11 @@ ms.date: 02/08/2018
 ms.topic: quickstart
 ms.devlang: go
 manager: routlaw
-ms.openlocfilehash: e530d944deca40e9e6c29b6c2768e2367822714e
-ms.sourcegitcommit: aaa8c37880332625f858a38f5918e6cf581bf48d
+ms.openlocfilehash: ae460dbf21b13c40f3d564274f8b790afe005aae
+ms.sourcegitcommit: af3473779cd7c2978f290fbdc51ee15eb1130840
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 02/15/2018
+ms.lasthandoff: 03/15/2018
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Gyors útmutató: Azure-beli virtuális gép üzembe helyezése sablonból a Góhoz készült Azure SDK-val
 
@@ -32,7 +32,7 @@ Ha az Azure CLI helyi telepítését használja, ehhez a rövid útmutatóhoz a 
 
 ## <a name="create-a-service-principal"></a>Egyszerű szolgáltatás létrehozása
 
-Ha nem interaktív módon szeretne bejelentkezni egy alkalmazással, egy egyszerű szolgáltatásra lesz szüksége. Az egyszerű szolgáltatások a szerepköralapú hitelesítést (RBAC) részei, amely egyedi felhasználói azonosítót hoz létre. Ha új egyszerű szolgáltatást szeretne létrehozni a parancssori felülettel, futtassa a következő parancsot:
+Ha nem interaktív módon szeretne bejelentkezni egy alkalmazással, egy egyszerű szolgáltatásra lesz szüksége. Az egyszerű szolgáltatások a szerepköralapú hozzáférés-vezérlés (RBAC) részei, amely egyedi felhasználói azonosítót hoz létre. Ha új egyszerű szolgáltatást szeretne létrehozni a parancssori felülettel, futtassa a következő parancsot:
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name az-go-vm-quickstart
@@ -40,7 +40,7 @@ az ad sp create-for-rbac --name az-go-vm-quickstart
 
 __Mindenképpen__ jegyezze fel az `appId`, `password` és `tenant` értékeket a kimenetben. Az alkalmazás ezekkel az értékekkel végzi a hitelesítést az Azure-ral.
 
-Az egyszerű szolgáltatások Azure CLI 2.0-val való létrehozásáról és kezeléséről további információkért lásd: [Azure-beli szolgáltatásnév létrehozása az Azure CLI 2.0-val](/cli/azure/create-an-azure-service-principal-azure-cli).
+Az egyszerű szolgáltatások Azure CLI 2.0-val való létrehozásával és kezelésével kapcsolatos további információért lásd: [Azure-beli egyszerű szolgáltatások létrehozása az Azure CLI 2.0-val](/cli/azure/create-an-azure-service-principal-azure-cli).
 
 ## <a name="get-the-code"></a>A kód letöltése
 
@@ -79,7 +79,7 @@ A `vm-quickstart-params.json` fájlban is szerkesztenie kell egy értéket.
     }
 ```
 
-* `vm_password`: A virtuális gép felhasználói fiókjának jelszava. 6–72 karakter hosszúnak kell lennie, és a következő karakterek közül 3-at kell tartalmaznia:
+* `vm_password`: A virtuális gép felhasználói fiókjának jelszava. 12–72 karakter hosszúnak kell lennie, és a következő karakterek közül 3-at kell tartalmaznia:
   * Egy kisbetű
   * Egy nagybetű
   * Egy szám
