@@ -7,6 +7,8 @@ items:
         href: azure-sdk-go-install.md
       - name: Eszközök
         href: azure-sdk-go-tools.md
+      - name: Hitelesítés
+        href: azure-sdk-go-authorization.md
   - name: Go SDK rövid útmutatók
     items:
       - name: Virtuális gépek és erőforrássablonok
@@ -23,7 +25,7 @@ items:
     items:
       - name: Hitelesítés és Active Directory
         href: azure-sdk-go-auth-aad-samples.md
-      - name: Tárolók
+      - name: Containers
         href: azure-sdk-go-containers-samples.md
       - name: Számítás és hálózatkezelés
         href: azure-sdk-go-compute-networking-samples.md
