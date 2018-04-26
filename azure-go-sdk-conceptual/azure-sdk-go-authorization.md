@@ -1,0 +1,147 @@
+---
+title: Hitelesítés a Góhoz készült Azure SDK-val
+description: Ismerje meg a Góhoz készült Azure SDK-ban elérhető hitelesítési módszereket, és azok használatát.
+services: azure
+author: sptramer
+ms.author: sttramer
+ms.date: 04/03/2018
+ms.topic: article
+ms.service: azure
+ms.devlang: go
+manager: carmonm
+ms.openlocfilehash: 39f9dc5a7cdf9ab84cfd9264446bacb31392ca80
+ms.sourcegitcommit: 59d2b4c9d8da15fbbd15e36551093219fdaf256e
+ms.translationtype: HT
+ms.contentlocale: hu-HU
+ms.lasthandoff: 04/18/2018
+---
+# <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
+
+A Góhoz készült Azure SDK számos különböző hitelesítési típust és módszert kínál az alkalmazások számára. A támogatott hitelesítési módszerek az adatok környezeti változókból való lekérésétől az interaktív webalapú hitelesítésig terjednek. Ez a cikk bemutatja az SDK-ban elérhető hitelesítési típusokat és a használatukhoz javasolt módszereket. Emellett megismerkedhet az ajánlott eljárásokkal is az alkalmazás számára legmegfelelőbb hitelesítési típus kiválasztásához.
+
+## <a name="available-authentication-types-and-methods"></a>Az elérhető hitelesítési típusok és módszerek
+
+A Góhoz készült Azure SDK számos hitelesítési típust kínál, amelyek eltérő hitelesítőadat-készleteket használnak. Mindegyik hitelesítési típust különböző hitelesítési módszerekkel lehet elérni, amelyek azt határozzák meg, hogy hogyan fogadja az SDK a hitelesítő adatokat bemeneti adatként. A következő táblázat ismerteti az elérhető hitelesítési típusokat és azokat a helyzeteket, amikor az alkalmazásnak érdemes használnia őket.
+
+| Hitelesítés típusa | Ajánlott, amikor... |
+|---------------------|---------------------|
+| Tanúsítványalapú hitelesítés | Egy X509 tanúsítvánnyal rendelkezik, amelyet egy Azure Active Directory-felhasználóhoz (AAD) vagy szolgáltatásnévhez konfiguráltak. További tudnivalókért lásd: [A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]. |
+| Ügyfél-hitelesítő adatok | Egy konfigurált szolgáltatásnévvel rendelkezik, amelyet ehhez az alkalmazáshoz vagy az alkalmazásosztályához állítottak be. További tudnivalókért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-val]. |
+| Felügyeltszolgáltatás-identitás (MSI) | Az alkalmazás egy olyan Azure-erőforráson fut, amelyet Felügyeltszolgáltatás-identitással (MSI) konfiguráltak. További tudnivalókért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]. |
+| Eszközjogkivonat | Az alkalmazást __kizárólag__ interaktív használatra szánták, és számos felhasználóval fog rendelkezni, potenciálisan több ADD-bérlőből. A felhasználók hozzáféréssel rendelkeznek egy webböngészőhöz, amelyen keresztül be tudnak jelentkezni. További információkért lásd: [Az eszközjogkivonattal történő hitelesítés használata](#use-device-token-authentication).|
+| Felhasználónév/jelszó | Van egy interaktív alkalmazása, amely nem használhat más hitelesítési módszert. A felhasználók AAD-bejelentkezéséhez nincs engedélyezve a többtényezős hitelesítés. |
+
+> [!IMPORTANT]
+> Ha nem az ügyfél-hitelesítő adatok hitelesítési típust használja, az alkalmazást regisztrálni kell az Azure Active Directoryban. Az eljárás leírásáért lásd: [Alkalmazások integrálása az Azure Active Directoryval](/azure/active-directory/develop/active-directory-integrating-applications).
+
+> [!NOTE]
+> Hacsak nem állnak fenn különleges követelmények, kerülje a felhasználónév- és jelszóalapú hitelesítést. Azokban az esetekben, amikor a felhasználóalapú bejelentkezés megfelelő megoldásnak számít, általában használni lehet helyette az eszközjogkivonattal történő hitelesítést.
+
+[A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]: /azure/active-directory/active-directory-certificate-based-authentication-get-started
+[Szolgáltatásnév létrehozása az Azure CLI 2.0-val]: /cli/azure/create-an-azure-service-principal-azure-cli
+[Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]: /azure/active-directory/managed-service-identity/overview
+
+Ezeket a hitelesítési típusokat különböző módszerekkel lehet elérni. A [_környezetalapú hitelesítés_](#use-environment-based-authentication) közvetlenül a program környezetéből olvassa be a hitelesítő adatokat. A [_fájlalapú hitelesítés_](#use-file-based-authentication) betölt egy fájlt, amely a szolgáltatásnév hitelesítő adatait tartalmazza. Az [_ügyfélalapú hitelesítés_](#use-an-authentication-client) a Go-kód egyik objektumát használja, és a felhasználóra bízza a hitelesítőadatok megadását a program végrehajtásakor. Végül pedig az [_eszközjogkivonattal történő hitelesítés_](#use-device-token-authentication) esetén a felhasználóknak interaktív módon kell bejelentkezniük egy webböngészőn keresztül, egy jogkivonat segítségével. Nem használható együtt a környezet- vagy fájlalapú hitelesítéssel.
+
+A `github.com/Azure/go-autorest/autorest/azure/auth` csomagban az összes hitelesítési funkció és típus megtalálható.
+
+> [!NOTE]
+> Ha nincsenek különleges követelmények, kerülje az ügyfélalapú hitelesítést. Ez a hitelesítési módszer támogatja a helytelen gyakorlatok alkalmazását. A hitelesítő adatok szoftveres rögzítése például különösen az ügyfélalapú hitelesítés használata során vonzó lehetőség. Az egyedi kód írása a hitelesítéshez szintén értelmét vesztheti a jövőbeli SDK kiadásoknál, ha megváltoznak a hitelesítési követelmények.
+
+## <a name="use-environment-based-authentication"></a>A környezetalapú hitelesítés használata
+
+Ha egy szigorúan ellenőrzött környezetben, például egy tárolóban futtatja az alkalmazást, a környezetalapú hitelesítés kézenfekvő lehet. Ebben az esetben az alkalmazás futtatása előtt konfigurálja a rendszerhéj-környezetet, a Go SDK pedig a futásidőben beolvassa ezeket a környezeti változókat az Azure-hitelesítéshez. 
+
+A környezetalapú hitelesítés az eszközjogkivonatok kivételével az összes hitelesítési módszert támogatja, és a következő sorrendben értékeli ki őket: ügyfél-hitelesítő adatok, tanúsítványok, felhasználónév/jelszó és Felügyeltszolgáltatás-identitás (MSI). Ha egy szükséges környezeti változó nincs beállítva, vagy ha a hitelesítési szolgáltatás visszautasítja az SDK-t, a rendszer megpróbálkozik a következő hitelesítési típussal. Ha az SDK nem tud hitelesítést végezni a környezetből, hibaüzenetet jelenít meg.
+
+Az alábbi táblázat azokat a környezeti változókat ismerteti, amelyeket be kell állítani a környezetalapú hitelesítés által támogatott hitelesítési típusokhoz.
+
+| Hitelesítés típusa | Környezeti változó | Leírás |
+| ------------------- | -------------------- | ----------- |
+| __Ügyfél-hitelesítő adatok__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amelyhez a szolgáltatásnév tartozik. |
+| | `AZURE_CLIENT_ID` | A szolgáltatásnév neve vagy azonosítója. |
+| | `AZURE_CLIENT_SECRET` | A szolgáltatásnévhez társított titkos kulcs. |
+| __Tanúsítvány__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amellyel a tanúsítványt regisztrálták. |
+| | `AZURE_CLIENT_ID` | A tanúsítványhoz társított alkalmazásügyfél-azonosító. |
+| | `AZURE_CERTIFICATE_PATH` | Az ügyféltanúsítvány-fájl elérési útja. |
+| | `AZURE_CERTIFICATE_PASSWORD` | Az ügyféltanúsítvány jelszava. |
+| __Felhasználónév/jelszó__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amelyhez a felhasználó tartozik. |
+| | `AZURE_CLIENT_ID` | Az alkalmazás ügyfél-azonosítója. |
+| | `AZURE_USERNAME` | A bejelentkezéshez használt felhasználói név. |
+| | `AZURE_PASSWORD` | A bejelentkezéshez használt jelszó. |
+| __MSI__ | | Az MSI használatához nem kell beállítani hitelesítő adatokat. Az alkalmazásnak egy, az MSI használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]. |
+
+Az alábbi környezeti változókat is beállíthatja, ha a felhő vagy felügyeleti végpont, amelyhez csatlakoznia kell, nem az alapértelmezett Azure-beli nyilvános felhő. A változók beállításának leggyakoribb oka az Azure Stack, egy másik földrajzi régióban lévő felhő vagy a klasszikus Azure üzemi modell használata.
+
+| Környezeti változó | Leírás  |
+|----------------------|--------------|
+| `AZURE_ENVIRONMENT` | Azon felhőkörnyezet neve, amelyhez a rendszer csatlakozik. |
+| `AZURE_AD_RESOURCE` | A csatlakozáshoz használandó Active Directory erőforrás-azonosító. Ennek egy URI-nak kell lennie, amely a felügyeleti végpontra mutat. |
+
+A környezetalapú hitelesítés használatakor hívja meg a [NewAuthorizerFromEnvironment](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#NewAuthorizerFromEnvironment) függvényt a hitelesítő objektum beszerzéséhez. A rendszer ezt az objektumot fogja beállítani az ügyfelek `Authorizer` tulajdonságánál, hogy engedélyezze számukra az Azure-hoz való hozzáférést.
+
+```go
+import "github.com/Azure/go-autorest/autorest/azure/auth"
+authorizer, err := auth.NewAuthorizerFromEnvironment()
+```
+
+## <a name="use-file-based-authentication"></a>A fájlalapú hitelesítés használata
+
+A fájlalapú hitelesítés csak akkor használható az ügyfél-hitelesítő adatokkal, ha azok [az Azure CLI 2.0](/cli/azure) által létrehozott helyi fájlformátumban vannak tárolva. Ezt a fájlt könnyedén létrehozhatja, amikor új szolgáltatásnevet hoz létre az `--sdk-auth` paraméterrel. Ha fájlalapú hitelesítést szeretne használni, ügyeljen arra, hogy a szolgáltatásnév létrehozásakor megadja ezt az argumentumot. Mivel a CLI az `stdout` kimeneten nyomtatja a kimenetet, irányítsa át a kimenetet egy fájlba.
+
+```azurecli
+az ad sp create-for-rbac --sdk-auth > azure.auth
+```
+
+Az `AZURE_AUTH_LOCATION` környezeti változónál állítsa be a hitelesítési fájl helyét. Az alkalmazás beolvassa ezt a környezeti változót, és elemzi a benne található hitelesítő adatokat. Ha futásidőben kell kiválasztania a hitelesítési fájlt, a program környezetét az [os.Setenv](https://golang.org/pkg/os/#Setenv) függvénnyel kezelheti.
+
+A hitelesítési adatok betöltéséhez hívja meg a [NewAuthorizerFromFile](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#NewAuthorizerFromFile) függvényt. A környezetalapú hitelesítéssel ellentétben a fájlalapú hitelesítésnél szükség van egy erőforrásvégpontra.
+
+```go
+import "github.com/Azure/go-autorest/autorest/azure/auth"
+authorizer, err := NewAuthorizerFromFile(azure.PublicCloud.ResourceManagerEndpoint)
+```
+
+A szolgáltatásnevek használatával és a hozzáférési engedélyeik kezelésével kapcsolatos további információkért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-val].
+
+## <a name="use-device-token-authentication"></a>Az eszközjogkivonattal történő hitelesítés használata
+
+Ha azt szeretné, hogy a felhasználók interaktívan jelentkezzenek be, a legjobb megoldás az eszközjogkivonattal történő hitelesítés használata. Ez a hitelesítési folyamat átad egy jogkivonatot a felhasználónak, amelyet azon a Microsoft bejelentkezési oldalon kell beillesztenie, ahol ezután be fog jelentkezni egy Azure Active Directory-fiókkal (AAD). Ez a hitelesítési módszer a szabványos felhasználónév- és jelszóalapú hitelesítéssel ellentétben támogatja a többtényezős hitelesítést engedélyező fiókokat.
+
+Az eszközjogkivonattal történő hitelesítés használatához hozzon létre egy [DeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig) hitelesítőt a [NewDeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#NewDeviceFlowConfig) függvénnyel. A hitelesítési folyamat elindításához hívja meg az [Authorizer](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig.Authorizer) függvényt az eredményül kapott objektumhoz. Az eszközfolyamat-hitelesítés letiltja a programok végrehajtását, amíg a teljes hitelesítési folyamat be nem fejeződik.
+
+```go
+import "github.com/Azure/go-autorest/autorest/azure/auth"
+deviceConfig := auth.NewDeviceFlowConfig(applicationID, tenantID)
+authorizer, err := deviceConfig.Authorizer()
+```
+
+## <a name="use-an-authentication-client"></a>Hitelesítési ügyfél használata
+
+Ha egy bizonyos típusú hitelesítésre van szüksége, és nem ellenzi azt, hogy a program tölti be a felhasználó hitelesítési adatait, akkor bármely ügyfelet használhatja, amely megfelel az [auth.AuthorizerConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#AuthorizerConfig) felületnek. Ha interaktív programot kíván létrehozni, speciális konfigurációs fájlokat szeretne használni, vagy az egyik követelmény nem engedélyezi a többi hitelesítési módszer használatát, olyan típust használjon, amely ezt a felületet valósítja meg.
+
+> [!WARNING]
+> Az Azure-beli hitelesítő adatokat soha ne rögzítse szoftveresen egy alkalmazásba. Ha egy bináris alkalmazásfájlba helyezi a titkos kulcsokat, a támadók egyszerűbben ki tudják nyerni azokat, függetlenül attól, hogy éppen fut-e az alkalmazás. Ezzel veszélynek teszi ki az összes Azure-erőforrást, amelyhez a hitelesítő adatok engedélyezve vannak!
+
+Az alábbi táblázat felsorolja azokat az SDK-ban elérhető típusokat, amelyek megfelelnek az `AuthorizerConfig` felületnek.
+
+| Hitelesítés típusa | Hitelesítő típusa |
+|---------------------|-----------------------|
+| Tanúsítványalapú hitelesítés | [ClientCertificateConfig] |
+| Ügyfél-hitelesítő adatok | [ClientCredentialsConfig] |
+| Felügyeltszolgáltatás-identitás (MSI) | [MSIConfig] |
+| Felhasználónév/jelszó | [UsernamePasswordConfig] |
+
+[ClientCertificateConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#ClientCertificateConfig
+[ClientCredentialsConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#ClientCredentialsConfig
+[MSIConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#MSIConfig
+[DeviceFlowConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig
+[UsernamePasswordConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#UsernamePasswordConfig
+
+Hozzon létre egy hitelesítőt a kapcsolódó `New` függvénnyel, majd a hitelesítés végrehajtásához hívja meg az `Authorize` függvényt az eredményül kapott objektumhoz. Például tanúsítványalapú hitelesítés használata esetén:
+
+```go
+import "github.com/Azure/go-autorest/autorest/azure/auth"
+certificateAuthorizer := auth.NewClientCertificateConfig(certificatePath, certificatePassword, clientID, tenantID)
+authorizerToken, err := certificateAuthorizer.Authorize()
+```
