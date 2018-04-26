@@ -3,19 +3,19 @@ title: A Góhoz készült Azure SDK telepítése
 description: Megtudhatja, hogyan telepítheti, másolhatja be és konfigurálhatja a Góhoz készült Azure SDK-t.
 author: sptramer
 ms.author: sttramer
-ms.date: 01/30/2018
+ms.date: 03/14/2018
 ms.topic: article
 ms.devlang: go
 manager: carmonm
-ms.openlocfilehash: 580daf4f2e91eabf97e3acd21bda183c559b57da
-ms.sourcegitcommit: fcc1786d59d2e32c97a9a8e0748e06f564a961bd
+ms.openlocfilehash: a6a92e080aea1a92f47a9d7083f133ca05a47541
+ms.sourcegitcommit: 26520a8c6e812facb5b9432d68c370fa23c99888
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 03/23/2018
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="installing-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
+# <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
-Üdvözöli Önt a Góhoz készült Azure SDK! Ez az SDK lehetővé teszi, hogy Go-alkalmazásokból kezelhesse és használhassa az Azure-szolgáltatásokat.
+Üdvözöli Önt a Góhoz készült Azure SDK! Az SDK lehetővé teszi, hogy Go-alkalmazásokból kezelhesse és használhassa az Azure-szolgáltatásokat.
 
 ## <a name="get-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK beszerzése
 
@@ -27,7 +27,7 @@ Az Azure Storage-blobok használata külön SDK-t igényel.
 go get -u -d github.com/Azure/azure-storage-blob-go/...
 ```
 
-## <a name="vendoring-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK bemásolása
+## <a name="vendor-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK bemásolása
 
 A Góhoz készült Azure SDK a [dep](https://github.com/golang/dep) eszközön keresztül másolható be. A stabilitás miatt ajánlott a bemásolás elvégzése. A `dep` támogatás használatához adja a `github.com/Azure/azure-sdk-for-go` elemet a `Gopkg.toml` egyik `[[constraint]]` szakaszához. A `14.0.0` verzió bemásolásához például adja hozzá a következő bejegyzést:
 
@@ -37,7 +37,7 @@ name = "github.com/Azure/azure-sdk-for-go"
 version = "14.0.0"
 ```
 
-## <a name="including-the-azure-sdk-for-go-in-your-project"></a>A Góhoz készült Azure SDK projektbe foglalása
+## <a name="include-the-azure-sdk-for-go-in-your-project"></a>A Góhoz készült Azure SDK projektbe foglalása
 
 Ha a Go-kódból szeretné használni az Azure-szolgáltatásokat, importálja az összes használt szolgáltatást és a szükséges `autorest` modulokat.
 A GoDocról beszerezheti az [elérhető szolgáltatások](https://godoc.org/github.com/Azure/azure-sdk-for-go) és az [AutoRest csomagok](https://godoc.org/github.com/Azure/go-autorest) elérhető moduljainak teljes listáját. A `go-autorest` leggyakrabban igényelt csomagjai a következők:
