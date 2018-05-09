@@ -3,15 +3,17 @@ title: A Góhoz készült Azure SDK telepítése
 description: Megtudhatja, hogyan telepítheti, másolhatja be és konfigurálhatja a Góhoz készült Azure SDK-t.
 author: sptramer
 ms.author: sttramer
-ms.date: 03/14/2018
-ms.topic: article
-ms.devlang: go
 manager: carmonm
-ms.openlocfilehash: a6a92e080aea1a92f47a9d7083f133ca05a47541
-ms.sourcegitcommit: 26520a8c6e812facb5b9432d68c370fa23c99888
+ms.date: 03/14/2018
+ms.topic: conceptual
+ms.prod: azure
+ms.technology: azure-sdk-go
+ms.devlang: go
+ms.openlocfilehash: ad77bdff881770512a828b19dc7af4821f4a55ad
+ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 04/16/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
@@ -62,7 +64,7 @@ import "github.com/Azure/azure-sdk-for-go/services/compute/mgmt/2017-03-30/compu
 
 Jelenleg ajánlott, hogy a szolgáltatások legújabb verzióját használja, ha nincs rá oka, hogy ne így tegyen.
 
-Ha a szolgáltatások együttes pillanatképére van szüksége, kiválaszthat egyetlen profilverziót is. Jelenleg az egyetlen zárolt profil a `2017-03-30` verzió, amelyben elképzelhető, hogy nem a legújabb szolgáltatásfunkciók szerepelnek. A profilok a `profiles` modul alatt találhatók, a verziójuk `YYYY-MM-DD` formátumban van. A szolgáltatások a profilverzióik alatt vannak csoportosítva. Ha például az Azure-erőforrások felügyeleti modult szeretné importálni a `2017-03-09` profilból:
+Ha a szolgáltatások együttes pillanatképére van szüksége, kiválaszthat egyetlen profilverziót is. Jelenleg az egyetlen zárolt profil a `2017-03-09` verzió, amelyben elképzelhető, hogy nem a legújabb szolgáltatásfunkciók szerepelnek. A profilok a `profiles` modul alatt találhatók, a verziójuk `YYYY-MM-DD` formátumban van. A szolgáltatások a profilverzióik alatt vannak csoportosítva. Ha például az Azure-erőforrások felügyeleti modult szeretné importálni a `2017-03-09` profilból:
 
 ```go
 import "github.com/Azure/azure-sdk-for-go/profiles/2017-03-09/resources/mgmt/resources"
