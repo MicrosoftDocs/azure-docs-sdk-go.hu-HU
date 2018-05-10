@@ -4,16 +4,19 @@ description: Ismerje meg a Góhoz készült Azure SDK-ban elérhető hitelesít�
 services: azure
 author: sptramer
 ms.author: sttramer
-ms.date: 04/03/2018
-ms.topic: article
-ms.service: azure
-ms.devlang: go
 manager: carmonm
-ms.openlocfilehash: 39f9dc5a7cdf9ab84cfd9264446bacb31392ca80
-ms.sourcegitcommit: 59d2b4c9d8da15fbbd15e36551093219fdaf256e
+ms.date: 04/03/2018
+ms.topic: conceptual
+ms.prod: azure
+ms.technology: azure-sdk-go
+ms.devlang: go
+ms.service: active-directory
+ms.component: authentication
+ms.openlocfilehash: 370f5607b89c0044022f7987d06c3a55c9d6f352
+ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 04/18/2018
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
 
@@ -84,6 +87,27 @@ A környezetalapú hitelesítés használatakor hívja meg a [NewAuthorizerFromE
 import "github.com/Azure/go-autorest/autorest/azure/auth"
 authorizer, err := auth.NewAuthorizerFromEnvironment()
 ```
+
+### <a name="authentication-on-azure-stack"></a>Hitelesítés az Azure Stackben
+
+Az Azure Stackben való hitelesítéshez be kell állítania a következő változókat:
+
+| Környezeti változó | Leírás  |
+|----------------------|--------------|
+| `AZURE_AD_ENDPOINT` | Az Active Directory-végpont. |
+| `AZURE_AD_RESOURCE` | Az Active Directory erőforrás-azonosító. |
+
+Ezek a változók az Azure Stack metaadat-információiból kérhetők le. A metaadatok lekéréséhez nyisson meg egy webböngészőt az Azure Stack-környezetben, majd használja a következő URL-címet`(ResourceManagerURL)/metadata/endpoints?api-version=1.0`
+
+A(z) `ResourceManagerURL` a régió neve, a gép neve és az Azure Stack üzemelő példányának külső teljes tartományneve (FQDN) alapján eltérő lehet:
+
+| Környezet | ResourceManagerURL |
+|----------------------|--------------|
+| Fejlesztői készlet | `https://management.local.azurestack.external/` |
+| Integrált rendszerek | `https://management.(region).ext-(machine-name).(FQDN)` |
+
+A Góhoz készült Azure SDK az Azure Stackben való használatáról az [API-verzióprofiloknak a Góval az Azure Stackben történő használatát](https://docs.microsoft.com/en-us/azure/azure-stack/user/azure-stack-version-profiles-go) bemutató témakörben tájékozódhat.
+
 
 ## <a name="use-file-based-authentication"></a>A fájlalapú hitelesítés használata
 
