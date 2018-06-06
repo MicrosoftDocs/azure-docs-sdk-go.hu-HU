@@ -9,11 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 2ea44fb8a4fdd6098bb44d3b5092cfbc352b424d
-ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
+ms.openlocfilehash: 1e122ab161766023ea146329a5edb13143699b8b
+ms.sourcegitcommit: b81b17cbb934399c195bfdcb87137aee935f5234
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 05/03/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34755532"
 ---
 # <a name="tools-for-developers-using-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK-t használó fejlesztőknek szánt eszközök
 
@@ -40,10 +41,3 @@ A függőségek csomagolása és a Góval végzett bemásolás számos módon el
 
 > [!div class="nextstepaction"]
 > [A dep függőségkezelő beszerzése](https://github.com/tools/godep)
-
-## <a name="telemetry-with-application-insights"></a>Telemetria az Application Insights segítségével
-
-Az [Application Insights](https://azure.microsoft.com/en-us/services/application-insights/) egy elemző termék, amely lehetővé teszi a telemetriai adatok könnyű begyűjtését az alkalmazásokból, és az Azure ökoszisztémába, a Visual Studio Team Servicesbe és a GitHubba integrálható. Számos alkalmazásban használható, és a Microsoft egy Go SDK-t is biztosít az Application Insights használatához.
-
-> [!div class="nextstepaction"]
-> [Az Application Insights beszerzése a Go SDK-hoz](https://github.com/Microsoft/ApplicationInsights-Go) 
