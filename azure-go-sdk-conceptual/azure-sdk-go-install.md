@@ -9,11 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: ad77bdff881770512a828b19dc7af4821f4a55ad
-ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
+ms.openlocfilehash: 8423b3fedd89e57662bf96f777a5b30926914da9
+ms.sourcegitcommit: b81b17cbb934399c195bfdcb87137aee935f5234
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 05/03/2018
+ms.lasthandoff: 06/04/2018
+ms.locfileid: "34755515"
 ---
 # <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
@@ -23,11 +24,14 @@ ms.lasthandoff: 05/03/2018
 
 [!INCLUDE [azure-sdk-go-get](includes/azure-sdk-go-get.md)]
 
-Az Azure Storage-blobok használata külön SDK-t igényel.
+Bizonyos Azure-szolgáltatások saját Go SDK-val rendelkeznek, ezért a Góhoz készült Azure SDK főcsomagok nem tartalmazzák őket. A következő táblázatban láthatók a saját SDK-val rendelkező szolgáltatások és a csomagneveik. Ezek a csomagok előzetes verziójú csomagoknak minősülnek.
 
-```bash
-go get -u -d github.com/Azure/azure-storage-blob-go/...
-```
+| Szolgáltatás | Csomag |
+|---------|---------|
+| Blob Storage | [github.com/Azure/azure-storage-blob-go](https://github.com/Azure/azure-storage-blob-go) |
+| File Storage | [github.com/Azure/azure-storage-file-go](https://github.com/Azure/azure-storage-file-go) |
+| Eseményközpont | [github.com/Azure/azure-event-hubs-go](https://github.com/Azure/azure-event-hubs-go) |
+| Application Insights | [github.com/Microsoft/ApplicationInsights-go](https://github.com/Microsoft/ApplicationInsights-go) |
 
 ## <a name="vendor-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK bemásolása
 
