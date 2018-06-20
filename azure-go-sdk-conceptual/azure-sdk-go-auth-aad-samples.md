@@ -15,6 +15,7 @@ ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: hu-HU
 ms.lasthandoff: 05/03/2018
+ms.locfileid: "32319849"
 ---
 # <a name="azure-sdk-for-go-samples-for-authentication-and-aad"></a><span data-ttu-id="53758-103">Góhoz készült Azure SDK-minták hitelesítéshez és az AAD-hez</span><span class="sxs-lookup"><span data-stu-id="53758-103">Azure SDK for Go samples for authentication and AAD</span></span>
 

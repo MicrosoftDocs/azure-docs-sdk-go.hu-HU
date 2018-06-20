@@ -15,6 +15,7 @@ ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: hu-HU
 ms.lasthandoff: 05/03/2018
+ms.locfileid: "32319866"
 ---
 # <a name="azure-sdk-for-go-samples-for-containers"></a><span data-ttu-id="f175e-103">Góhoz készült Azure SDK-minták tárolókhoz</span><span class="sxs-lookup"><span data-stu-id="f175e-103">Azure SDK for Go samples for containers</span></span>
 
