@@ -17,6 +17,7 @@ ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
 ms.translationtype: HT
 ms.contentlocale: hu-HU
 ms.lasthandoff: 05/03/2018
+ms.locfileid: "32319883"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
 
