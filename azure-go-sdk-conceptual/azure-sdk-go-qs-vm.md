@@ -10,16 +10,16 @@ ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: 1fbcc54df2a2aebce56c5a5800361f3d3aed1ccc
-ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
+ms.openlocfilehash: 7592e8617436a76dd27cac5269971051982425bf
+ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 05/03/2018
-ms.locfileid: "32319934"
+ms.lasthandoff: 07/11/2018
+ms.locfileid: "38067016"
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Gyors útmutató: Azure-beli virtuális gép üzembe helyezése sablonból a Góhoz készült Azure SDK-val
 
-Ez a rövid útmutató az erőforrások sablonból való üzembe helyezésére összpontosít a Góhoz készült Azure SDK használatával. A sablonok az összes erőforrás pillanatképei egy [Azure-erőforráscsoportban](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview). Menet közben megismerheti az SDK működését és konvencióit, mialatt hasznos feladatot végez.
+Ez a rövid útmutató az erőforrások sablonból való üzembe helyezésére összpontosít a Góhoz készült Azure SDK használatával. A sablonok az összes erőforrás pillanatképei egy [Azure-erőforráscsoportban](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). Menet közben megismerheti az SDK működését és konvencióit, mialatt hasznos feladatot végez.
 
 A rövid útmutató végén olyan futó virtuális gépe lesz, amelybe felhasználónévvel és jelszóval tud bejelentkezni.
 
@@ -35,8 +35,7 @@ Ha az Azure CLI helyi telepítését használja, ehhez a rövid útmutatóhoz a 
 
 ## <a name="create-a-service-principal"></a>Egyszerű szolgáltatás létrehozása
 
-
-Ha nem interaktív módon szeretne bejelentkezni egy alkalmazással, egy egyszerű szolgáltatásra lesz szüksége. Az egyszerű szolgáltatások a szerepköralapú hozzáférés-vezérlés (RBAC) részei, amely egyedi felhasználói azonosítót hoz létre. Ha új egyszerű szolgáltatást szeretne létrehozni a parancssori felülettel, futtassa a következő parancsot:
+Ha nem interaktív módon szeretne bejelentkezni az Azure-ba egy alkalmazással, egy szolgáltatásnévre lesz szüksége. Az egyszerű szolgáltatások a szerepköralapú hozzáférés-vezérlés (RBAC) részei, amely egyedi felhasználói azonosítót hoz létre. Ha új egyszerű szolgáltatást szeretne létrehozni a parancssori felülettel, futtassa a következő parancsot:
 
 ```azurecli-interactive
 az ad sp create-for-rbac --name az-go-vm-quickstart --sdk-auth > quickstart.auth

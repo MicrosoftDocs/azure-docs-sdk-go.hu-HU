@@ -12,12 +12,12 @@ ms.technology: azure-sdk-go
 ms.devlang: go
 ms.service: active-directory
 ms.component: authentication
-ms.openlocfilehash: 370f5607b89c0044022f7987d06c3a55c9d6f352
-ms.sourcegitcommit: f08abf902b48f8173aa6e261084ff2cfc9043305
+ms.openlocfilehash: c7970167070bdf1f3fc75692f3e34268801c65df
+ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 05/03/2018
-ms.locfileid: "32319883"
+ms.lasthandoff: 07/11/2018
+ms.locfileid: "38066999"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
 
@@ -30,8 +30,8 @@ A Góhoz készült Azure SDK számos hitelesítési típust kínál, amelyek elt
 | Hitelesítés típusa | Ajánlott, amikor... |
 |---------------------|---------------------|
 | Tanúsítványalapú hitelesítés | Egy X509 tanúsítvánnyal rendelkezik, amelyet egy Azure Active Directory-felhasználóhoz (AAD) vagy szolgáltatásnévhez konfiguráltak. További tudnivalókért lásd: [A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]. |
-| Ügyfél-hitelesítő adatok | Egy konfigurált szolgáltatásnévvel rendelkezik, amelyet ehhez az alkalmazáshoz vagy az alkalmazásosztályához állítottak be. További tudnivalókért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-val]. |
-| Felügyeltszolgáltatás-identitás (MSI) | Az alkalmazás egy olyan Azure-erőforráson fut, amelyet Felügyeltszolgáltatás-identitással (MSI) konfiguráltak. További tudnivalókért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]. |
+| Ügyfél-hitelesítő adatok | Egy konfigurált szolgáltatásnévvel rendelkezik, amelyet ehhez az alkalmazáshoz vagy az alkalmazásosztályához állítottak be. További tudnivalókért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-s verziójával]. |
+| Felügyeltszolgáltatás-identitás (MSI) | Az alkalmazás egy olyan Azure-erőforráson fut, amelyet Felügyeltszolgáltatás-identitással (MSI) konfiguráltak. További tudnivalókért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]. |
 | Eszközjogkivonat | Az alkalmazást __kizárólag__ interaktív használatra szánták, és számos felhasználóval fog rendelkezni, potenciálisan több ADD-bérlőből. A felhasználók hozzáféréssel rendelkeznek egy webböngészőhöz, amelyen keresztül be tudnak jelentkezni. További információkért lásd: [Az eszközjogkivonattal történő hitelesítés használata](#use-device-token-authentication).|
 | Felhasználónév/jelszó | Van egy interaktív alkalmazása, amely nem használhat más hitelesítési módszert. A felhasználók AAD-bejelentkezéséhez nincs engedélyezve a többtényezős hitelesítés. |
 
@@ -42,8 +42,8 @@ A Góhoz készült Azure SDK számos hitelesítési típust kínál, amelyek elt
 > Hacsak nem állnak fenn különleges követelmények, kerülje a felhasználónév- és jelszóalapú hitelesítést. Azokban az esetekben, amikor a felhasználóalapú bejelentkezés megfelelő megoldásnak számít, általában használni lehet helyette az eszközjogkivonattal történő hitelesítést.
 
 [A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]: /azure/active-directory/active-directory-certificate-based-authentication-get-started
-[Szolgáltatásnév létrehozása az Azure CLI 2.0-val]: /cli/azure/create-an-azure-service-principal-azure-cli
-[Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]: /azure/active-directory/managed-service-identity/overview
+[Szolgáltatásnév létrehozása az Azure CLI 2.0-s verziójával]: /cli/azure/create-an-azure-service-principal-azure-cli
+[Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]: /azure/active-directory/managed-service-identity/overview
 
 Ezeket a hitelesítési típusokat különböző módszerekkel lehet elérni. A [_környezetalapú hitelesítés_](#use-environment-based-authentication) közvetlenül a program környezetéből olvassa be a hitelesítő adatokat. A [_fájlalapú hitelesítés_](#use-file-based-authentication) betölt egy fájlt, amely a szolgáltatásnév hitelesítő adatait tartalmazza. Az [_ügyfélalapú hitelesítés_](#use-an-authentication-client) a Go-kód egyik objektumát használja, és a felhasználóra bízza a hitelesítőadatok megadását a program végrehajtásakor. Végül pedig az [_eszközjogkivonattal történő hitelesítés_](#use-device-token-authentication) esetén a felhasználóknak interaktív módon kell bejelentkezniük egy webböngészőn keresztül, egy jogkivonat segítségével. Nem használható együtt a környezet- vagy fájlalapú hitelesítéssel.
 
@@ -71,9 +71,9 @@ Az alábbi táblázat azokat a környezeti változókat ismerteti, amelyeket be 
 | | `AZURE_CERTIFICATE_PASSWORD` | Az ügyféltanúsítvány jelszava. |
 | __Felhasználónév/jelszó__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amelyhez a felhasználó tartozik. |
 | | `AZURE_CLIENT_ID` | Az alkalmazás ügyfél-azonosítója. |
-| | `AZURE_USERNAME` | A bejelentkezéshez használt felhasználói név. |
+| | `AZURE_USERNAME` | A bejelentkezéshez használt felhasználónév. |
 | | `AZURE_PASSWORD` | A bejelentkezéshez használt jelszó. |
-| __MSI__ | | Az MSI használatához nem kell beállítani hitelesítő adatokat. Az alkalmazásnak egy, az MSI használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrások esetén]. |
+| __MSI__ | | Az MSI használatához nem kell beállítani hitelesítő adatokat. Az alkalmazásnak egy, az MSI használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]. |
 
 Az alábbi környezeti változókat is beállíthatja, ha a felhő vagy felügyeleti végpont, amelyhez csatlakoznia kell, nem az alapértelmezett Azure-beli nyilvános felhő. A változók beállításának leggyakoribb oka az Azure Stack, egy másik földrajzi régióban lévő felhő vagy a klasszikus Azure üzemi modell használata.
 
@@ -107,7 +107,7 @@ A(z) `ResourceManagerURL` a régió neve, a gép neve és az Azure Stack üzemel
 | Fejlesztői készlet | `https://management.local.azurestack.external/` |
 | Integrált rendszerek | `https://management.(region).ext-(machine-name).(FQDN)` |
 
-A Góhoz készült Azure SDK az Azure Stackben való használatáról az [API-verzióprofiloknak a Góval az Azure Stackben történő használatát](https://docs.microsoft.com/en-us/azure/azure-stack/user/azure-stack-version-profiles-go) bemutató témakörben tájékozódhat.
+A Góhoz készült Azure SDK az Azure Stackben való használatáról az [API-verzióprofiloknak a Góval az Azure Stackben történő használatát](https://docs.microsoft.com/azure/azure-stack/user/azure-stack-version-profiles-go) bemutató témakörben tájékozódhat.
 
 
 ## <a name="use-file-based-authentication"></a>A fájlalapú hitelesítés használata
@@ -127,11 +127,11 @@ import "github.com/Azure/go-autorest/autorest/azure/auth"
 authorizer, err := NewAuthorizerFromFile(azure.PublicCloud.ResourceManagerEndpoint)
 ```
 
-A szolgáltatásnevek használatával és a hozzáférési engedélyeik kezelésével kapcsolatos további információkért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-val].
+A szolgáltatásnevek használatával és a hozzáférési engedélyeik kezelésével kapcsolatos további információkért lásd: [Szolgáltatásnév létrehozása az Azure CLI 2.0-s verziójával].
 
 ## <a name="use-device-token-authentication"></a>Az eszközjogkivonattal történő hitelesítés használata
 
-Ha azt szeretné, hogy a felhasználók interaktívan jelentkezzenek be, a legjobb megoldás az eszközjogkivonattal történő hitelesítés használata. Ez a hitelesítési folyamat átad egy jogkivonatot a felhasználónak, amelyet azon a Microsoft bejelentkezési oldalon kell beillesztenie, ahol ezután be fog jelentkezni egy Azure Active Directory-fiókkal (AAD). Ez a hitelesítési módszer a szabványos felhasználónév- és jelszóalapú hitelesítéssel ellentétben támogatja a többtényezős hitelesítést engedélyező fiókokat.
+Ha azt szeretné, hogy a felhasználók interaktívan jelentkezzenek be, a legjobb megoldás az eszközjogkivonattal történő hitelesítés használata. Ez a hitelesítési folyamat átad egy jogkivonatot a felhasználónak, amelyet azon a Microsoft bejelentkezési webhelyen kell beillesztenie, ahol ezután egy Azure Active Directory- (AAD-) fiókkal kell hitelesítést végeznie. Ez a hitelesítési módszer a szabványos felhasználónév- és jelszóalapú hitelesítéssel ellentétben támogatja a többtényezős hitelesítést engedélyező fiókokat.
 
 Az eszközjogkivonattal történő hitelesítés használatához hozzon létre egy [DeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig) hitelesítőt a [NewDeviceFlowConfig](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#NewDeviceFlowConfig) függvénnyel. A hitelesítési folyamat elindításához hívja meg az [Authorizer](https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#DeviceFlowConfig.Authorizer) függvényt az eredményül kapott objektumhoz. Az eszközfolyamat-hitelesítés letiltja a programok végrehajtását, amíg a teljes hitelesítési folyamat be nem fejeződik.
 
