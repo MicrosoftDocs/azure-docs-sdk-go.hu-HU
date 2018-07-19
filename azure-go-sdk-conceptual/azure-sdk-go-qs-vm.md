@@ -1,21 +1,21 @@
 ---
 title: Azure-beli virtuális gép üzembe helyezése a Góról
-description: Helyezzen üzembe egy virtuális gépet a Góhoz készült Azure SDK-val.
+description: Helyezzen üzembe egy virtuális gépet a Go nyelvhez készült Azure SDK-val.
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 04/03/2018
+ms.date: 07/13/2018
 ms.topic: quickstart
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: 7592e8617436a76dd27cac5269971051982425bf
-ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
+ms.openlocfilehash: 6b1de35748fb7694d45715fa7f028d5730530d2e
+ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38067016"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39039556"
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Gyors útmutató: Azure-beli virtuális gép üzembe helyezése sablonból a Góhoz készült Azure SDK-val
 
@@ -27,9 +27,9 @@ A rövid útmutató végén olyan futó virtuális gépe lesz, amelybe felhaszn�
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-Ha az Azure CLI helyi telepítését használja, ehhez a rövid útmutatóhoz a __CLI 2.0.28-as__ vagy újabb verziójára van szükség. Futtassa az `az --version` parancsot annak ellenőrzéséhez, hogy a CLI telepítés megfelel-e ennek a követelménynek. Ha telepítenie vagy frissítenie kell, lásd: [Az Azure CLI 2.0 telepítése](/cli/azure/install-azure-cli).
+Ha az Azure CLI helyi telepítését használja, ehhez a rövid útmutatóhoz a __CLI 2.0.28-as__ vagy újabb verziójára van szükség. Futtassa az `az --version` parancsot annak ellenőrzéséhez, hogy a CLI telepítés megfelel-e ennek a követelménynek. Ha telepíteni vagy frissíteni szeretne, olvassa el [az Azure CLI telepítését](/cli/azure/install-azure-cli) ismertető cikket.
 
-## <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése 
+## <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
 [!INCLUDE [azure-sdk-go-get](includes/azure-sdk-go-get.md)]
 
@@ -242,7 +242,9 @@ A `readJSON` betölti az üzembe helyezési fájlokat, amelyek részletei itt ki
     }
 ```
 
-Ez a kód ugyanazt a mintát követi, mint az erőforráscsoport létrehozásakor. Létrejön egy új ügyfél, amely hitelesíteni tud az Azure-ral, majd a rendszer meghív egy metódust. A metódusnak ugyanaz a neve is (`CreateOrUpdate`), mint az erőforráscsoportok megfelelő metódusának. Ez a minta több helyen is látható az SDK-ban. A hasonló munkát végző metódusoknak általában ugyanaz a neve.
+Ez a kód ugyanazt a mintát követi, mint az erőforráscsoport létrehozásakor. Létrejön egy új ügyfél, amely hitelesíteni tud az Azure-ral, majd a rendszer meghív egy metódust.
+A metódusnak ugyanaz a neve is (`CreateOrUpdate`), mint az erőforráscsoportok megfelelő metódusának. Ez a minta több helyen is látható az SDK-ban.
+A hasonló munkát végző metódusoknak általában ugyanaz a neve.
 
 A legnagyobb különbség a `deploymentsClient.CreateOrUpdate` metódus visszaadott értéke. Az érték típusa [Jövőbeli](https://godoc.org/github.com/Azure/go-autorest/autorest/azure#Future), amely a [jövőbeli kialakítási mintát](https://en.wikipedia.org/wiki/Futures_and_promises) követi. A jövő az Azure-ban egy hosszú futásidejű műveletet jelez, amelyet a művelet befejezésekor lekérdezhet, megszakíthat vagy letilthat.
 

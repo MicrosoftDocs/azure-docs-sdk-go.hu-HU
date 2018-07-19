@@ -4,28 +4,28 @@ description: A Góhoz készült Azure SDK és az Azure-szolgáltatások használ
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 01/30/2018
+ms.date: 07/13/2018
 ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 006d140bffb66fdd769a14511232d4ea5081811d
-ms.sourcegitcommit: 181d4e0b164cf39b3feac346f559596bd19c94db
+ms.openlocfilehash: dfa3912ac13e6f6d52d607f9dcc150f3a5b57602
+ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 07/11/2018
-ms.locfileid: "38066982"
+ms.lasthandoff: 07/14/2018
+ms.locfileid: "39039505"
 ---
 # <a name="tools-for-developers-using-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK-t használó fejlesztőknek szánt eszközök
 
 Itt talál néhány eszközt a Go-kódok hatékony írásához és azok problémamentes működéséhez az Azure-szolgáltatásokkal.
 
-## <a name="azure-cli-20"></a>Azure CLI 2.0
+## <a name="azure-cli"></a>Azure CLI
 
-Az Azure 2.0 CLI parancssori felületet biztosít az előfizetésekben az Azure-erőforrások létrehozásához és konfigurálásához. A parancssori felülettel gyorsan építhet közös és megosztott Azure-erőforrásokat, hogy a szolgáltatások összetettebb használatára összpontosíthasson. A parancssori felület lekérdezési és szűrési szolgáltatásokkal rendelkezik, így közvetlenül a kedvenc parancssori eszközeinek adhatja át az eredményeket. A parancssori felület a helyi rendszeren Docker-lemezképként vagy az [Azure Cloud Shellen](https://docs.microsoft.com/azure/cloud-shell/overview) keresztül telepíthető.
+Az Azure CLI parancssori felületet biztosít az előfizetésekben az Azure-erőforrások létrehozásához és konfigurálásához. A parancssori felülettel gyorsan építhet közös és megosztott Azure-erőforrásokat, hogy a szolgáltatások összetettebb használatára összpontosíthasson. A parancssori felület lekérdezési és szűrési szolgáltatásokkal rendelkezik, így közvetlenül a kedvenc parancssori eszközeinek adhatja át az eredményeket. A parancssori felület a helyi rendszeren Docker-lemezképként vagy az [Azure Cloud Shellen](https://docs.microsoft.com/azure/cloud-shell/overview) keresztül telepíthető.
 
 > [!div class="nextstepaction"]
-> [Az Azure CLI 2.0 telepítése](/cli/azure/install-azure-cli)
+> [Telepítse az Azure CLI-t](/cli/azure/install-azure-cli)
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
@@ -34,6 +34,13 @@ A Visual Studio Code egy könnyen használható szerkesztő, amely bővítménye
 * [A Visual Studio Code telepítése](https://code.visualstudio.com/Download)
 * [A Visual Studio Code Go bővítmény beszerzése](https://code.visualstudio.com/docs/languages/go)
 * [Az Azure Tools bővítmény beszerzése](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-azureextensionpack)
+
+## <a name="cicd-with-azure-devops-project"></a>CI/CD az Azure DevOps Projecttel
+
+Az Azure DevOps Project-folyamattal beállíthatja a Go-alkalmazások folyamatos felépítését és üzembe helyezését. Mindössze egy Git-adattárra lesz szüksége, hogy közvetlenül az Azure-erőforrásokon tudjon üzembe helyezést és tesztelést végezni. A konfigurációs folyamat egyszerűen létrehozható és kezelhető, és mivel közvetlenül az Azure-on van kiépítve, ugyanúgy lehet kezelni, mint más Azure-erőforrásokat.
+
+> [!div class="nextstepaction"]
+> [További tudnivalók a CI/CD-folyamat Azure DevOps Projects-szel történő létrehozásáról](/devops-project/azure-devops-project-go)
 
 ## <a name="dependency-management-with-dep"></a>Függőségkezelés a dep használatával
 
