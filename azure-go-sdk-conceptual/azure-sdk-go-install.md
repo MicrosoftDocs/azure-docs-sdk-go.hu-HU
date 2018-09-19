@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 3388359bba791c87025b6ffd0e6b476f95589f73
-ms.sourcegitcommit: 81e97407e6139375bf7357045e818c87a17dcde1
+ms.openlocfilehash: 013a771345d96f0fa8dbece3218a01650744f70b
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 06/19/2018
-ms.locfileid: "36262980"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059186"
 ---
 # <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
@@ -37,9 +37,9 @@ Bizonyos Azure-szolgáltatások saját Go SDK-val rendelkeznek, ezért a Góhoz 
 
 ## <a name="vendor-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK bemásolása
 
-A Góhoz készült Azure SDK a [dep](https://github.com/golang/dep) eszközön keresztül másolható be. A stabilitás miatt ajánlott a bemásolás elvégzése. A `dep` támogatás használatához adja a `github.com/Azure/azure-sdk-for-go` elemet a `Gopkg.toml` egyik `[[constraint]]` szakaszához. A `14.0.0` verzió bemásolásához például adja hozzá a következő bejegyzést:
+A Góhoz készült Azure SDK a [dep](https://github.com/golang/dep) eszközön keresztül másolható be. A stabilitás miatt ajánlott a bemásolás elvégzése. A `dep` a saját projektjében való használatához adja a `github.com/Azure/azure-sdk-for-go` elemet a `Gopkg.toml` egyik `[[constraint]]` szakaszához. A `14.0.0` verzió bemásolásához például adja hozzá a következő bejegyzést:
 
-```
+```toml
 [[constraint]]
 name = "github.com/Azure/azure-sdk-for-go"
 version = "14.0.0"
@@ -62,13 +62,14 @@ A GoDocról beszerezheti az [elérhető szolgáltatások](https://godoc.org/gith
 [autorest/adal]: https://godoc.org/github.com/Azure/go-autorest/autorest/adal
 [autorest/to]: https://godoc.org/github.com/Azure/go-autorest/autorest/to
 
-Az Azure-szolgáltatások moduljai azok SDK API-jaitól függetlenül vannak ellátva verzióval. Ezek a verziók a modul importálási útvonalának részei, és egy _szolgáltatásverzióból_ vagy _profilból_ származnak. Jelenleg ajánlott a fejlesztéshez és a kiadáshoz is egy adott szolgáltatásverziót használnia. A szolgáltatások a `services` modul alatt találhatók. Az importálás teljes elérési útja a szolgáltatás neve, amelyet a verzió követ `YYYY-MM-DD` formátumban, amelyet ismét a szolgáltatás neve követ. A számítási szolgáltatás `2017-03-30` verziójának belefoglalásához például:
+A Go-csomagok és az Azure-szolgáltatások egymástól függetlenül vannak ellátva verzióval. A szolgáltatás verziói a modul importálási útvonalának részei a `services` modul alatt. A modul teljes elérési útja a szolgáltatás neve, amelyet a verzió követ `YYYY-MM-DD` formátumban, amelyet ismét a szolgáltatás neve követ. A számítási szolgáltatás `2017-03-30` verziójának importálásához például:
 
 ```go
 import "github.com/Azure/azure-sdk-for-go/services/compute/mgmt/2017-03-30/compute"
 ```
 
-Jelenleg ajánlott, hogy a szolgáltatások legújabb verzióját használja, ha nincs rá oka, hogy ne így tegyen.
+A fejlesztés megkezdésekor ajánlott a szolgáltatás legújabb verzióját használni és annál is maradni.
+A szolgáltatás követelményei megváltozhatnak az egyes verziók között, ami miatt a kódja működésképtelenné válhat, még akkor is, ha az alatt az idő alatt a Go SDK nem frissült.
 
 Ha a szolgáltatások együttes pillanatképére van szüksége, kiválaszthat egyetlen profilverziót is. Jelenleg az egyetlen zárolt profil a `2017-03-09` verzió, amelyben elképzelhető, hogy nem a legújabb szolgáltatásfunkciók szerepelnek. A profilok a `profiles` modul alatt találhatók, a verziójuk `YYYY-MM-DD` formátumban van. A szolgáltatások a profilverzióik alatt vannak csoportosítva. Ha például az Azure-erőforrások felügyeleti modult szeretné importálni a `2017-03-09` profilból:
 

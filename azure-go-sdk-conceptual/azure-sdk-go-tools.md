@@ -1,20 +1,20 @@
 ---
-title: A Go fejlesztők eszközei
+title: A Góhoz készült Azure SDK-t használó fejlesztőknek szánt eszközök
 description: A Góhoz készült Azure SDK és az Azure-szolgáltatások használatára szolgáló eszközök
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 07/13/2018
+ms.date: 09/05/2018
 ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: dfa3912ac13e6f6d52d607f9dcc150f3a5b57602
-ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
+ms.openlocfilehash: 70cf7d645f47df29e8e42599a0acd75858144783
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39039505"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059203"
 ---
 # <a name="tools-for-developers-using-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK-t használó fejlesztőknek szánt eszközök
 
@@ -29,22 +29,22 @@ Az Azure CLI parancssori felületet biztosít az előfizetésekben az Azure-erő
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-A Visual Studio Code egy könnyen használható szerkesztő, amely bővítmények révén átfogó támogatását nyújt a Go nyelvhez. Ezek a bővítmények olyan szolgáltatások támogatását is tartalmazzák, mint az automatikus kiegészítés, az `impl` sablonok, az újrabontás és a hibakeresés. A Visual Studio Code az általános fejlesztői eszközökhöz (például a forráskezeléshez), valamint az Azure-szolgáltatásokkal való közvetlen interakciókhoz is biztosít bővítményeket. A Microsoft az ezen Azure-bővítményeket, az Azure CLI interaktív felületét is beleértve, tartalmazó hivatalos metabővítményt is fenntart.
+A Visual Studio Code egy könnyen használható szerkesztő, amely támogatást nyújt a Góhoz. Ez a bővítmény olyan funkciókat nyújt, mint az automatikus kiegészítés, az `impl` sablonok, az újrabontás és a hibakeresés. A Visual Studio Code támogatást nyújt a szerkesztőn belüli verziókövetéshez, valamint az Azure-szolgáltatásokkal való munkához is biztosít bővítményeket.
 
 * [A Visual Studio Code telepítése](https://code.visualstudio.com/Download)
 * [A Visual Studio Code Go bővítmény beszerzése](https://code.visualstudio.com/docs/languages/go)
-* [Az Azure Tools bővítmény beszerzése](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-azureextensionpack)
+* [A Visual Studio Code Azure-eszközök bővítményének beszerzése](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-azureextensionpack)
 
 ## <a name="cicd-with-azure-devops-project"></a>CI/CD az Azure DevOps Projecttel
 
-Az Azure DevOps Project-folyamattal beállíthatja a Go-alkalmazások folyamatos felépítését és üzembe helyezését. Mindössze egy Git-adattárra lesz szüksége, hogy közvetlenül az Azure-erőforrásokon tudjon üzembe helyezést és tesztelést végezni. A konfigurációs folyamat egyszerűen létrehozható és kezelhető, és mivel közvetlenül az Azure-on van kiépítve, ugyanúgy lehet kezelni, mint más Azure-erőforrásokat.
+Az Azure DevOps Project-folyamatokkal beállíthatja a Go-alkalmazások folyamatos integrációs rendszerét. Mindössze egy Git-adattárra lesz szüksége, hogy közvetlenül az Azure-on tudjon üzembe helyezést és tesztelést végezni.
 
 > [!div class="nextstepaction"]
-> [További tudnivalók a CI/CD-folyamat Azure DevOps Projects-szel történő létrehozásáról](/devops-project/azure-devops-project-go)
+> [További tudnivalók a CI/CD-folyamat Azure DevOps Projects-szel történő létrehozásáról](/azure/devops-project/azure-devops-project-go)
 
 ## <a name="dependency-management-with-dep"></a>Függőségkezelés a dep használatával
 
-A függőségek csomagolása és a Góval végzett bemásolás számos módon elvégezhető, mivel hivatalos megoldás még nincs. A kezelés elvégzésének ajánlott módja a `dep` függőségkezelő használata. A Góhoz készült Azure SDK a depet használja a bemásoláshoz, és garantáltan megfelelően szerzi be a függőségeket bármely más, a depet használó projekthez is.
+A Góhoz készült Azure SDK a depet használja a függőségkezeléshez. A dep parancs lehetővé teszi a Go-alkalmazás követelményeinek lekérését és bemásolását, így megelőzi a verzióütközéseket és biztosítja a projekt megfelelő működését.
 
 > [!div class="nextstepaction"]
 > [A dep függőségkezelő beszerzése](https://github.com/golang/dep)

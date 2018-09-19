@@ -4,22 +4,21 @@ description: Kiválasztott Góhoz készült Azure SDK-minták az Azure Active Di
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 03/21/2018
+ms.date: 09/05/2018
 ms.topic: sample
-ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: active-directory
 ms.devlang: go
-ms.openlocfilehash: dfaed972f23daa92fcec686cf34ee636aa624b9a
-ms.sourcegitcommit: 0f581979216f7c9d4913681a6d9f6fe09af26e43
+ms.openlocfilehash: ace50d88ac57622b90e4070a6ca8d6fc0a52afac
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 08/02/2018
-ms.locfileid: "39475874"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059220"
 ---
 # <a name="azure-sdk-for-go-samples-for-authentication-and-aad"></a>Góhoz készült Azure SDK-minták hitelesítéshez és az AAD-hez
 
-Az alábbi táblázatban szereplő hivatkozások kiválasztott Go-forráskódmintákra mutatnak, amelyek a Go nyelvhez készült Azure SDK-val végzett hitelesítéshez és az Azure Active Directory (AAD) szolgáltatásainak kezeléséhez használhatóak.
+Az alábbi táblázatban szereplő hivatkozások kiválasztott mintákra mutatnak, amelyek bemutatják az Azure Active Directory hitelesítését és használatát a Góhoz készült Azure SDK-ból.
 
 Az összes Góhoz készült Azure SDK-minta elérhető a [GitHubon](https://github.com/Azure-Samples/azure-sdk-for-go-samples).
 

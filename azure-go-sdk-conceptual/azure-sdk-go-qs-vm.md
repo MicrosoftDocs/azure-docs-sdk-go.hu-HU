@@ -4,24 +4,26 @@ description: Helyezzen üzembe egy virtuális gépet a Go nyelvhez készült Azu
 author: sptramer
 ms.author: sttramer
 manager: carmonm
-ms.date: 07/13/2018
+ms.date: 09/05/2018
 ms.topic: quickstart
-ms.prod: azure
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: 6b1de35748fb7694d45715fa7f028d5730530d2e
-ms.sourcegitcommit: d1790b317a8fcb4d672c654dac2a925a976589d4
+ms.openlocfilehash: a7970be0857fd414d776241b033af0c23457790c
+ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 07/14/2018
-ms.locfileid: "39039556"
+ms.lasthandoff: 09/07/2018
+ms.locfileid: "44059135"
 ---
 # <a name="quickstart-deploy-an-azure-virtual-machine-from-a-template-with-the-azure-sdk-for-go"></a>Gyors útmutató: Azure-beli virtuális gép üzembe helyezése sablonból a Góhoz készült Azure SDK-val
 
-Ez a rövid útmutató az erőforrások sablonból való üzembe helyezésére összpontosít a Góhoz készült Azure SDK használatával. A sablonok az összes erőforrás pillanatképei egy [Azure-erőforráscsoportban](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview). Menet közben megismerheti az SDK működését és konvencióit, mialatt hasznos feladatot végez.
+Ez a rövid útmutató bemutatja, hogyan helyezhet üzembe erőforrásokat Azure Resource Manager-sablonból a Góhoz készült Azure SDK használatával. A sablonok az összes erőforrás pillanatképei egy [Azure-erőforráscsoportban](/azure/azure-resource-manager/resource-group-overview). Menet közben megismerheti az SDK működését és konvencióit.
 
 A rövid útmutató végén olyan futó virtuális gépe lesz, amelybe felhasználónévvel és jelszóval tud bejelentkezni.
+
+> [!NOTE]
+> Egy virtuális gép a Góban Resource Manager-sablon nélkül való létrehozásának menetét egy [imperatív minta](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm.go) ismerteti, amely bemutatja, hogyan állíthatja össze és konfigurálhatja az összes virtuálisgép-erőforrást az SDK használatával. A minta használata ebben a példában lehetővé teszi az SDK konvencióira való koncentrálást az Azure szolgáltatásarchitektúrájának részletekbe menő ismertetése nélkül.
 
 [!INCLUDE [quickstarts-free-trial-note](includes/quickstarts-free-trial-note.md)]
 
@@ -38,7 +40,7 @@ Ha az Azure CLI helyi telepítését használja, ehhez a rövid útmutatóhoz a 
 Ha nem interaktív módon szeretne bejelentkezni az Azure-ba egy alkalmazással, egy szolgáltatásnévre lesz szüksége. Az egyszerű szolgáltatások a szerepköralapú hozzáférés-vezérlés (RBAC) részei, amely egyedi felhasználói azonosítót hoz létre. Ha új egyszerű szolgáltatást szeretne létrehozni a parancssori felülettel, futtassa a következő parancsot:
 
 ```azurecli-interactive
-az ad sp create-for-rbac --name az-go-vm-quickstart --sdk-auth > quickstart.auth
+az ad sp create-for-rbac --sdk-auth > quickstart.auth
 ```
 
 Az `AZURE_AUTH_LOCATION` környezeti változónál állítsa be a fájl teljes elérési útját. Az SDK ezután megkeresi és beolvassa a hitelesítő adatokat közvetlenül a fájlból, anélkül, hogy módosítania kellene valamit, vagy rögzítenie kellene a szolgáltatásnév adatait.
@@ -62,13 +64,7 @@ cd $GOPATH/src/github.com/azure-samples/azure-sdk-for-go-samples/quickstarts/dep
 go run main.go
 ```
 
-Ha hiba van az üzemelő példányban, megjelenik egy üzenet, amely jelzi, hogy hiba történt, de ez gyakran nem elég részletes. Az Azure CLI használatával kérdezze le az üzemelő példány hibájának összes részletét a következő paranccsal:
-
-```azurecli-interactive
-az group deployment show -g GoVMQuickstart -n VMDeployQuickstart
-```
-
-Ha az üzembe helyezés sikeres, megjelenik egy üzenet a felhasználónévvel, az IP-címmel és a jelszóval, amelyekkel bejelentkezhet az újonnan létrehozott virtuális gépre. Lépjen be SSH-val a gépre annak ellenőrzéséhez, hogy működik-e.
+Ha az üzembe helyezés sikeres, megjelenik egy üzenet a felhasználónévvel, az IP-címmel és a jelszóval, amelyekkel bejelentkezhet az újonnan létrehozott virtuális gépre. Lépjen be SSH-val a gépre annak ellenőrzéséhez, hogy működik-e. 
 
 ## <a name="cleaning-up"></a>Takarítás
 
@@ -77,6 +73,18 @@ A rövid útmutató során létrehozott erőforrásokat az erőforráscsoport t�
 ```azurecli-interactive
 az group delete -n GoVMQuickstart
 ```
+
+Törölje a létrehozott szolgáltatásnevet is. A `quickstart.auth` fájlban található egy JSON-kulcs a következőhöz: `clientId`. Másolja ezt az értéket a `CLIENT_ID_VALUE`-környezet változójához, majd futtassa a következő Azure CLI-parancsot:
+
+```azurecli-interactive
+az ad sp delete --id ${CLIENT_ID_VALUE}
+```
+
+Ahol megadja a `CLIENT_ID_VALUE` értékét a következőből: `quickstart.auth`.
+
+> [!WARNING]
+> Ha nem törli a szolgáltatásnevet az alkalmazásból, akkor az aktív marad az Azure Active Directory-bérlőben.
+> Bár a szolgáltatásnév neve és jelszava is UUID-ként jön létre, fontos, hogy a biztonság fenntartása érdekében törölje a nem használt szolgáltatásneveket és Azure Active Directory-alkalmazásokat.
 
 ## <a name="code-in-depth"></a>A kód részletei
 
@@ -111,7 +119,7 @@ var (
 
 Meg vannak határozva a létrehozott erőforrások neveit megadó értékek. Itt a hely is meg van adva, amely módosítható, hogy lássa, hogyan működnek az üzemelő példányok más adatközpontokban. Nem minden adatközponton érhető el az összes szükséges erőforrás.
 
-A `clientInfo` típus úgy van meghatározva, hogy magába foglalja az összes információt, amelyet külön kell betölteni a hitelesítési fájlból az ügyfelek SDK-ban való beállításához, valamint a virtuális gép jelszavának beállításához.
+A `clientInfo` típus magában foglalja az összes, hitelesítési fájlból betöltött információt az ügyfelek SDK-ban való beállításához, valamint a virtuális gép jelszavának beállításához.
 
 A `templateFile` és `parametersFile` állandó az üzembe helyezéshez szükséges fájlokra mutat. Az `authorizer` hitelesítéshez való konfigurálását a Go SDK fogja elvégezni. A `ctx` változó a hálózati műveletek [Go környezete](https://blog.golang.org/context).
 
@@ -170,7 +178,7 @@ A kód által végrehajtott lépések sorrendben a következők:
 * Az üzemelő példány létrehozása ebben a csoportban (`createDeployment`)
 * Az üzembe helyezett virtuális gép bejelentkezési információinak beszerzése és megjelenítése (`getLogin`)
 
-### <a name="creating-the-resource-group"></a>Az erőforráscsoport létrehozása
+### <a name="create-the-resource-group"></a>Az erőforráscsoport létrehozása
 
 A `createGroup` függvény létrehozza az erőforráscsoportot. A hívásfolyam és az argumentumok megtekintésekor láthatja, hogyan vannak rendszerezve a szolgáltatásinterakciók az SDK-ban.
 
@@ -197,7 +205,7 @@ A [`to.StringPtr`](https://godoc.org/github.com/Azure/go-autorest/autorest/to#St
 
 A `groupsClient.CreateOrUpdate` metódus egy mutatót ad vissza az erőforráscsoportot jelölő adattípusnak. Az ilyen típusú közvetlen visszatérési érték olyan rövid futásidejű műveletet jelez, amelynek szinkronban kell lennie. A következő szakasz a hosszú futásidejű műveletek egy példáját, illetve annak a kezelési módját mutatja be.
 
-### <a name="performing-the-deployment"></a>Az üzembe helyezés végrehajtása
+### <a name="perform-the-deployment"></a>Az üzembe helyezés végrehajtása
 
 Amikor létrejött az erőforráscsoport, itt az idő az üzembe helyezéshez. Ez a kód a logika különböző részeinek kihangsúlyozása érdekében kisebb szakaszokra van osztva.
 
@@ -254,20 +262,13 @@ A legnagyobb különbség a `deploymentsClient.CreateOrUpdate` metódus visszaad
     if err != nil {
         return
     }
-    deployment, err = deploymentFuture.Result(deploymentsClient)
-
-    // Work around possible bugs or late-stage failures
-    if deployment.Name == nil || err != nil {
-        deployment, _ = deploymentsClient.Get(ctx, resourceGroupName, deploymentName)
-    }
-    return
+    return deploymentFuture.Result(deploymentsClient)
+}
 ```
 
 Ebben a példában a legjobb, ha megvárja a művelet befejezését. Ha a jövőre vár, szüksége van egy [környezeti objektumra](https://blog.golang.org/context) és a `Future` létrehozó ügyfelére. Itt két lehetséges hibaforrás van: Az ügyfél oldalán okozott hiba, amikor megpróbálja meghívni a metódust, illetve egy hibaválasz a kiszolgálóról. Az utóbbit a rendszer a `deploymentFuture.Result` hívás részeként adja vissza.
 
-Ha lekérte a telepítéssel kapcsolatos információkat, létezik egy megkerülő megoldás azokra a lehetséges programhibákra, amikor ezek az információk nem jelennek meg. Az adatok betöltéséhez hívja meg manuálisan a `deploymentsClient.Get` metódust.
-
-### <a name="obtaining-the-assigned-ip-address"></a>A hozzárendelt IP-cím beszerzése
+### <a name="get-the-assigned-ip-address"></a>A hozzárendelt IP-cím beszerzése
 
 Ha bármit szeretne tenni az újonnan létrehozott virtuális géppel, szüksége van a hozzárendelt IP-címre. Az IP-címek önmaguk saját külön Azure-erőforrásai, amelyek NIC-erőforrásokhoz kötődnek.
 
@@ -301,7 +302,7 @@ A virtuális gép felhasználójának értéke szintén betölthető a JSON-ból
 
 ## <a name="next-steps"></a>További lépések
 
-Ebben a rövid útmutatóban egy meglévő sablont helyezett üzembe a Gón keresztül. Ezután az újonnan létrehozott virtuális gépet SSH-n keresztül csatlakoztatta, hogy biztosan fusson.
+Ebben a rövid útmutatóban egy meglévő sablont helyezett üzembe a Gón keresztül. Ezután az újonnan létrehozott virtuális gépet SSH-n keresztül csatlakoztatta.
 
 Ha többet szeretne megtudni a virtuális gépek Góval való használatáról az Azure-környezetben, lásd: [Azure számítási minták a Góhoz](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute) vagy [Azure erőforrás-felügyeleti példák a Góhoz](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/resources).
 
