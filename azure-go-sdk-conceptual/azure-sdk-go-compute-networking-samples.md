@@ -9,12 +9,12 @@ ms.topic: sample
 ms.technology: azure-sdk-go
 ms.service: virtual-machines
 ms.devlang: go
-ms.openlocfilehash: d570ad8598ae06633d0010245c207641161ee446
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
+ms.openlocfilehash: 20c264157905ea870b8c432d64a204974a1bc964
+ms.sourcegitcommit: c435f6602524565d340aac5506be5e955e78f16c
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059084"
+ms.lasthandoff: 09/12/2018
+ms.locfileid: "44711957"
 ---
 # <a name="azure-sdk-for-go-samples-for-compute-and-networking"></a>Góhoz készült Azure SDK-minták számításhoz és hálózatkezeléshez
 
@@ -28,4 +28,4 @@ Az összes Góhoz készült Azure SDK-minta elérhető a [GitHubon](https://gith
 | [compute/vm_disk](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_disk.go) | Virtuális gépek adatlemezeinek létrehozása, csatolása, leválasztása, frissítése és titkosítása. |
 | [compute/vm](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm.go) | Virtuális gépek létrehozása, frissítése és inaktiválása. |
 | [compute/vm_with_availabilityset](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_availabilityset.go) | Rendelkezésre állási csoportok és terheléselosztók létrehozása virtuális gépekhez. |
-| [compute/vm_with_identity](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_identity.go) | Virtuális gépekkel használt felügyeltszolgáltatás-identitások (MSI) létrehozása és kezelése. |
+| [compute/vm_with_identity](https://github.com/Azure-Samples/azure-sdk-for-go-samples/blob/master/compute/vm_with_identity.go) | Azure-erőforrások felügyelt identitásainak létrehozása és módosítása. | 

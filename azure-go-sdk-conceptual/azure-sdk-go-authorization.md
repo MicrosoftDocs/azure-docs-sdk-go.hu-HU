@@ -11,12 +11,12 @@ ms.technology: azure-sdk-go
 ms.devlang: go
 ms.service: active-directory
 ms.component: authentication
-ms.openlocfilehash: 28fd4a4c0832ab19dcf52dc549d0ddc0d1eec6f1
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
+ms.openlocfilehash: 8f94b9ba715c32263d324306cce69bd484c05702
+ms.sourcegitcommit: c435f6602524565d340aac5506be5e955e78f16c
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059101"
+ms.lasthandoff: 09/12/2018
+ms.locfileid: "44711974"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
 
@@ -30,7 +30,7 @@ A Góhoz készült Azure SDK számos hitelesítési típust kínál, amelyek elt
 |---------------------|---------------------|
 | Tanúsítványalapú hitelesítés | Egy X509 tanúsítvánnyal rendelkezik, amelyet egy Azure Active Directory-felhasználóhoz (AAD) vagy szolgáltatásnévhez konfiguráltak. További tudnivalókért lásd: [A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]. |
 | Ügyfél-hitelesítő adatok | Egy konfigurált szolgáltatásnévvel rendelkezik, amelyet ehhez az alkalmazáshoz vagy az alkalmazásosztályához állítottak be. További tudnivalókért lásd: [Szolgáltatásnév létrehozása az Azure CLI-vel]. |
-| Felügyeltszolgáltatás-identitás (MSI) | Az alkalmazás egy olyan Azure-erőforráson fut, amelyet Felügyeltszolgáltatás-identitással (MSI) konfiguráltak. További tudnivalókért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]. |
+| Azure-erőforrások felügyelt identitásai | Az alkalmazás egy olyan Azure-erőforráson fut, amelyet egy felügyelt identitással konfiguráltak. További tudnivalókért lásd [Azure-erőforrások felügyelt identitásai]. |
 | Eszközjogkivonat | Az alkalmazást __kizárólag__ interaktív használatra szánták. A felhasználóknál engedélyezve lehet a többtényezős hitelesítés. A felhasználók hozzáféréssel rendelkeznek egy webböngészőhöz, amelyen keresztül be tudnak jelentkezni. További információkért lásd: [Az eszközjogkivonattal történő hitelesítés használata](#use-device-token-authentication).|
 | Felhasználónév/jelszó | Van egy interaktív alkalmazása, amely nem használhat más hitelesítési módszert. A felhasználók AAD-bejelentkezéséhez nincs engedélyezve a többtényezős hitelesítés. |
 
@@ -42,7 +42,7 @@ A Góhoz készült Azure SDK számos hitelesítési típust kínál, amelyek elt
 
 [A tanúsítványalapú hitelesítés első lépései az Azure Active Directoryban]: /azure/active-directory/active-directory-certificate-based-authentication-get-started
 [Szolgáltatásnév létrehozása az Azure CLI-vel]: /cli/azure/create-an-azure-service-principal-azure-cli
-[Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]: /azure/active-directory/managed-service-identity/overview
+[Azure-erőforrások felügyelt identitásai]: /azure/active-directory/managed-identities-azure-resources/overview
 
 Ezeket a hitelesítési típusokat különböző módszerekkel lehet elérni.
 
@@ -65,7 +65,7 @@ A környezetalapú hitelesítés az eszközjogkivonatok kivételével az összes
 * Ügyfél-hitelesítő adatok
 * X509 tanúsítványok
 * Felhasználónév/jelszó
-* Felügyeltszolgáltatás-identitás (MSI)
+* Azure-erőforrások felügyelt identitásai
 
 Ha a hitelesítés típusánál nincs beállított érték, vagy a rendszer elutasította, akkor az SDK automatikusan a következő hitelesítési típussal próbálkozik. Ha nincs több típus, amivel próbálkozhat, akkor az SDK hibaüzenetet jelenít meg.
 
@@ -84,7 +84,7 @@ Az alábbi táblázat azokat a környezeti változókat ismerteti, amelyeket be 
 | | `AZURE_CLIENT_ID` | Az alkalmazás ügyfél-azonosítója. |
 | | `AZURE_USERNAME` | A bejelentkezéshez használt felhasználónév. |
 | | `AZURE_PASSWORD` | A bejelentkezéshez használt jelszó. |
-| __MSI__ | | Az MSI-hitelesítéshez nincs szükség hitelesítő adatokra. Az alkalmazásnak egy, az MSI használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd: [Felügyeltszolgáltatás-identitás (MSI) Azure-erőforrásokhoz]. |
+| __Kezelt identitás__ | | A felügyeltidentitás-hitelesítéshez nincs szükség hitelesítő adatokra. Az alkalmazásnak egy, a felügyelt identitások használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd [Azure-erőforrások felügyelt identitásai]. |
 
 Az alábbi környezeti változók beállításával olyan felhőhöz vagy felügyeleti végponthoz csatlakozhat, amely nem az alapértelmezett Azure-beli nyilvános felhő. A változók beállításának leggyakoribb oka az Azure Stack, egy másik földrajzi régióban lévő felhő vagy a klasszikus üzemi modell használata.
 
@@ -168,7 +168,7 @@ Az alábbi táblázat felsorolja azokat az SDK-ban elérhető típusokat, amelye
 |---------------------|-----------------------|
 | Tanúsítványalapú hitelesítés | [ClientCertificateConfig] |
 | Ügyfél-hitelesítő adatok | [ClientCredentialsConfig] |
-| Felügyeltszolgáltatás-identitás (MSI) | [MSIConfig] |
+| Azure-erőforrások felügyelt identitásai | [MSIConfig] |
 | Felhasználónév/jelszó | [UsernamePasswordConfig] |
 
 [ClientCertificateConfig]: https://godoc.org/github.com/Azure/go-autorest/autorest/azure/auth#ClientCertificateConfig
