@@ -10,12 +10,12 @@ ms.topic: conceptual
 ms.technology: azure-sdk-go
 ms.devlang: go
 ms.component: authentication
-ms.openlocfilehash: f5c2c56e43828f0bedad0b5781dc71991ce1fd3e
-ms.sourcegitcommit: 172f81dd6e4c6a275dc8031815aa87cdb488cbf0
+ms.openlocfilehash: c2c3dccfa8da5cfe57fee0b90139002068982560
+ms.sourcegitcommit: 887b15afcdeaf926a5f3d21b64e4045167fd062c
 ms.translationtype: HT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 09/26/2018
-ms.locfileid: "47231675"
+ms.lasthandoff: 10/21/2018
+ms.locfileid: "49481982"
 ---
 # <a name="authentication-methods-in-the-azure-sdk-for-go"></a>Hitelesítési módszerek a Góhoz készült Azure SDK-ban
 
@@ -70,20 +70,21 @@ Ha a hitelesítés típusánál nincs beállított érték, vagy a rendszer elut
 
 Az alábbi táblázat azokat a környezeti változókat ismerteti, amelyeket be kell állítani a környezetalapú hitelesítés által támogatott hitelesítési típusokhoz.
 
-| Hitelesítés típusa | Környezeti változó | Leírás |
-| ------------------- | -------------------- | ----------- |
-| __Ügyfél-hitelesítő adatok__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amelyhez a szolgáltatásnév tartozik. |
-| | `AZURE_CLIENT_ID` | A szolgáltatásnév neve vagy azonosítója. |
-| | `AZURE_CLIENT_SECRET` | A szolgáltatásnévhez társított titkos kulcs. |
-| __Tanúsítvány__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amellyel a tanúsítványt regisztrálták. |
-| | `AZURE_CLIENT_ID` | A tanúsítványhoz társított alkalmazásügyfél-azonosító. |
-| | `AZURE_CERTIFICATE_PATH` | Az ügyféltanúsítvány-fájl elérési útja. |
-| | `AZURE_CERTIFICATE_PASSWORD` | Az ügyféltanúsítvány jelszava. |
-| __Felhasználónév/jelszó__ | `AZURE_TENANT_ID` | Annak az Active Directory-bérlőnek az azonosítója, amelyhez a felhasználó tartozik. |
-| | `AZURE_CLIENT_ID` | Az alkalmazás ügyfél-azonosítója. |
-| | `AZURE_USERNAME` | A bejelentkezéshez használt felhasználónév. |
-| | `AZURE_PASSWORD` | A bejelentkezéshez használt jelszó. |
-| __Kezelt identitás__ | | A felügyeltidentitás-hitelesítéshez nincs szükség hitelesítő adatokra. Az alkalmazásnak egy, a felügyelt identitások használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd [Azure-erőforrások felügyelt identitásai]. |
+
+|  Hitelesítés típusa   |     Környezeti változó     |                                                                                                     Leírás                                                                                                      |
+|------------------------|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Ügyfél-hitelesítő adatok** |      `AZURE_TENANT_ID`       |                                                                    Annak az Active Directory-bérlőnek az azonosítója, amelyhez a szolgáltatásnév tartozik.                                                                     |
+|                        |      `AZURE_CLIENT_ID`       |                                                                                       A szolgáltatásnév neve vagy azonosítója.                                                                                       |
+|                        |    `AZURE_CLIENT_SECRET`     |                                                                                  A szolgáltatásnévhez társított titkos kulcs.                                                                                   |
+|    **Tanúsítvány**     |      `AZURE_TENANT_ID`       |                                                                   Annak az Active Directory-bérlőnek az azonosítója, amellyel a tanúsítványt regisztrálták.                                                                    |
+|                        |      `AZURE_CLIENT_ID`       |                                                                              A tanúsítványhoz társított alkalmazásügyfél-azonosító.                                                                              |
+|                        |   `AZURE_CERTIFICATE_PATH`   |                                                                                       Az ügyféltanúsítvány-fájl elérési útja.                                                                                       |
+|                        | `AZURE_CERTIFICATE_PASSWORD` |                                                                                       Az ügyféltanúsítvány jelszava.                                                                                       |
+| **Felhasználónév/jelszó**  |      `AZURE_TENANT_ID`       |                                                                           Annak az Active Directory-bérlőnek az azonosítója, amelyhez a felhasználó tartozik.                                                                           |
+|                        |      `AZURE_CLIENT_ID`       |                                                                                              Az alkalmazás ügyfél-azonosítója.                                                                                              |
+|                        |       `AZURE_USERNAME`       |                                                                                            A bejelentkezéshez használt felhasználónév.                                                                                             |
+|                        |       `AZURE_PASSWORD`       |                                                                                            A bejelentkezéshez használt jelszó.                                                                                             |
+|  **Kezelt identitás**  |                              | A felügyeltidentitás-hitelesítéshez nincs szükség hitelesítő adatokra. Az alkalmazásnak egy, a felügyelt identitások használatára konfigurált Azure-erőforráson kell futnia. További részletekért lásd [Azure-erőforrások felügyelt identitásai]. |
 
 Az alábbi környezeti változók beállításával olyan felhőhöz vagy felügyeleti végponthoz csatlakozhat, amely nem az alapértelmezett Azure-beli nyilvános felhő. A változók beállításának leggyakoribb oka az Azure Stack, egy másik földrajzi régióban lévő felhő vagy a klasszikus üzemi modell használata.
 
