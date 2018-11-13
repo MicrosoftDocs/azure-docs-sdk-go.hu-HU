@@ -1,3 +1,3 @@
-## Microsoft Open Source Code of Conduct
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft Open Source Code of Conduct
+A projekt a Microsoft nyílt forráskódú projekteket szabályozó etikai kódexe, a [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/) hatálya alá esik.
+További információért tekintse át a [viselkedési szabályzat GYIK dokumentumát](https://opensource.microsoft.com/codeofconduct/faq/), illetve további kérdések vagy megjegyzések esetén írjon az [opencode@microsoft.com](mailto:opencode@microsoft.com) e-mail-címre.
