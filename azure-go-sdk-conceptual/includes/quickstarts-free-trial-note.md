@@ -7,10 +7,10 @@ ms.topic: include
 ms.prod: azure
 ms.technology: azure-cli
 ms.openlocfilehash: e7f6753034f34ad096ff6c86e95c37a609af2d7a
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
-ms.translationtype: HT
+ms.sourcegitcommit: 887b15afcdeaf926a5f3d21b64e4045167fd062c
+ms.translationtype: MT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059246"
+ms.lasthandoff: 11/23/2018
+ms.locfileid: "52293496"
 ---
-<span data-ttu-id="990a1-101">Ha nem rendelkezik Azure-előfizetéssel, hozzon létre egy [ingyenes fiókot](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).</span><span class="sxs-lookup"><span data-stu-id="990a1-101">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).</span></span>
+<span data-ttu-id="74cbf-101">Ha nem rendelkezik Azure-előfizetéssel, hozzon létre egy [ingyenes fiókot](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).</span><span class="sxs-lookup"><span data-stu-id="74cbf-101">If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).</span></span>
