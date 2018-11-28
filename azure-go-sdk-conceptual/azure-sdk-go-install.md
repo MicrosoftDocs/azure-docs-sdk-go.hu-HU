@@ -9,12 +9,12 @@ ms.topic: conceptual
 ms.prod: azure
 ms.technology: azure-sdk-go
 ms.devlang: go
-ms.openlocfilehash: 013a771345d96f0fa8dbece3218a01650744f70b
-ms.sourcegitcommit: 8b9e10b960150dc08f046ab840d6a5627410db29
-ms.translationtype: HT
+ms.openlocfilehash: 7990ec8bde5622078aa822fc7e66ba5c4384d682
+ms.sourcegitcommit: 3d26b464f196f8675c636ae792637d4c882fb92c
+ms.translationtype: MT
 ms.contentlocale: hu-HU
-ms.lasthandoff: 09/07/2018
-ms.locfileid: "44059186"
+ms.lasthandoff: 11/27/2018
+ms.locfileid: "52337143"
 ---
 # <a name="install-the-azure-sdk-for-go"></a>A Góhoz készült Azure SDK telepítése
 
@@ -90,7 +90,7 @@ A Góhoz készült Azure SDK használatának megkezdéséhez próbáljon ki egy 
 
 Ha most azonnal el szeretné kezdeni a Go SDK más szolgáltatásainak használatát, tekintsen meg néhány rendelkezésre álló mintakódot.
 
-* [Hitelesítés az Azure-szolgáltatásokkal](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/iam)
+* [Hitelesítés az Azure-szolgáltatásokkal](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/internal/iam)
 * [Új virtuális gépek üzembe helyezése SSH hitelesítéssel](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/compute)
 * [Tárolórendszerkép üzembe helyezése az Azure Container Instances szolgáltatásban](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerinstance)
 * [Fürt létrehozása Azure Kubernetes-szolgáltatásban](https://github.com/Azure-Samples/azure-sdk-for-go-samples/tree/master/containerservice)
